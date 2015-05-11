@@ -28,15 +28,28 @@
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <meta name="msapplication-tap-highlight" content="no" />
-        <title>Hello World</title>
+        <title>Karteikarten</title>
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+            <div data-role="page" id="loginpage">
+                <h1>Karteikarten App</h1>
+                <h2>Login</h2>
+                <form action="#mainpage" method="post" id="login">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" placeholder="Username" value="">
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="password" id="password" placeholder="Passwort" value="">
+                    <button type="submit" id="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
+                </form>
+                <br>
+                <button href="register.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
             </div>
+
+            <div data-role="page" id="mainpage">
+
+            </div>
+
         </div>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/index.js"></script>
