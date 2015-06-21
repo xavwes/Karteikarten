@@ -31,15 +31,23 @@
         <title>Karteikarten</title>
     </head>
     <body>
-        <div data-role="page">
-            <div data-role="header">
-                Karteikarten
-            </div>
-            <div data-role="main" class="ui-content">
-                <div class="ui-field-contain">
+        <div class="app">
+            <div data-role="page" id="loginpage">
+                <h1>Karteikarten App</h1>
+                <h2>Login</h2>
+                <form action="#mainpage" method="post" id="login">
                     <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" placeholder="Put in your Username">
-                </div>
+                    <input type="text" name="username" id="username" placeholder="Username" value="">
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="password" id="password" placeholder="Passwort" value="">
+                    <button type="submit" id="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
+                </form>
+                <br>
+                <button href="register.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
+            </div>
+
+            <div data-role="page" id="mainpage">
+
             </div>
 
         </div>
