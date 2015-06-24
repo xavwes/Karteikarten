@@ -1,6 +1,7 @@
 <?php
     include('dbConnection.php');
 
+//Durch POST ersetzen, nur in der Entwicklung als GET Parameter
     $connection = connectToDatabase();
     $username = $_GET['username'];
     $password = $_GET['password'];
