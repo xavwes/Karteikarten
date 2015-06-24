@@ -5,6 +5,7 @@
  * Date: 24.06.15
  * Time: 15:26
  */
+
     include('dbConnection.php');
     $connection = connectToDatabase();
 

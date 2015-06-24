@@ -32,15 +32,17 @@
     </head>
     <body>
         <div class="app">
+
+            <!-- Page one, Login und Registrieren Button, wenn schon LoginDaten gespeichert sind, automatisch einloggen -->
             <div data-role="page" id="loginpage">
                 <h1>Karteikarten App</h1>
                 <h2>Login</h2>
-                <form action="#mainpage" method="post" id="login">
+                <form id="login" data-ajax="false">
                     <label for="username">Username:</label>
                     <input type="text" name="username" id="username" placeholder="Username" value="">
                     <label for="password">Passwort:</label>
                     <input type="password" name="password" id="password" placeholder="Passwort" value="">
-                    <button type="submit" id="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
+                    <button type="submit" id="login-btn" name="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
                 </form>
                 <br>
                 <button href="register.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
@@ -55,6 +57,37 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+
+            //Funktioniert noch nicht, Fehler
+            $('#login-btn').click(function()
+            {
+                var formData = $('#login').serialize();
+
+                $.ajax({
+                    url: 'http://localhost/karteikarten/karteikarten-server/login.php',
+                    data: formData,
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        alert(result['Status']);
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert(error);
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+
+                return false;
+            });
+
+
         </script>
     </body>
 </html>
