@@ -5,6 +5,9 @@
  * Date: 24.06.15
  * Time: 15:26
  */
+    header("Content-Type: application/json, charset=UTF-8");
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST');
 
     include('dbConnection.php');
     $connection = connectToDatabase();
@@ -15,6 +18,7 @@
 
     $sql = "Select * from users where username='" . $username . "' and password = '" . $password . "'";
     $result = mysql_query($sql) or die("Anfrage failed");
+
 
      if(mysql_num_rows($result) == 1)
      {

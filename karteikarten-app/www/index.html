@@ -58,7 +58,6 @@
         <script type="text/javascript">
             app.initialize();
 
-            //Funktioniert noch nicht, Fehler
             $('#login-btn').click(function()
             {
                 var formData = $('#login').serialize();
@@ -75,7 +74,6 @@
                     },
                     error: function (request,error, result) {
                         // This callback function will trigger on unsuccessful action
-                        alert(error);
                         alert('Network error has occurred please try again!');
                         console.log('Request', request);
                         console.log('Error', error);
