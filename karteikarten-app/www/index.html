@@ -45,11 +45,24 @@
                     <button type="submit" id="login-btn" name="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
                 </form>
                 <br>
-                <button href="register.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
+                <button id="register-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
             </div>
 
             <div data-role="page" id="mainpage">
+                <p id="anrede">Hello User</p>
+            </div>
 
+            <div data-role="page" id="registerpage">
+                <h1>Registrieren</h1>
+                <form id="register" data-ajax="false">
+                    <label for="username">Username:</label>
+                    <input type="text" name="registername" id="registername" placeholder="Username" value="">
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="registerpassword" id="registerpassword" placeholder="Passwort" value="">
+                    <label for="password">Passwort wiederholen:</label>
+                    <input type="password" name="registerpasswordsecond" id="registerpasswordsecond" placeholder="Passwort wiederholen" value="">
+                    <button type="submit" id="registerAccount-btn" name="registerAccount-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
+                </form>
             </div>
 
         </div>
@@ -57,6 +70,11 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            if(window.localStorage.getItem("username") != undefined)
+            {
+                alert(window.localStorage.getItem("username"));
+                $.mobile.changePage('#mainpage');
+            }
 
             $('#login-btn').click(function()
             {
@@ -70,7 +88,16 @@
 
                     success: function (result)
                     {
-                        alert(result['Status']);
+
+                        if(result['Status'] == 'login')
+                        {
+                            window.localStorage.setItem("username", "xaver");
+                            $.mobile.changePage('#mainpage');
+                        }
+                        else
+                        {
+                            alert('Login failed');
+                        }
                     },
                     error: function (request,error, result) {
                         // This callback function will trigger on unsuccessful action
@@ -83,6 +110,11 @@
                 });
 
                 return false;
+            });
+
+            $('#register-btn').click(function()
+            {
+                $.mobile.changePage('#registerpage');
             });
 
 
