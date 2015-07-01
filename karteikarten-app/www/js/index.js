@@ -18,8 +18,14 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function()
+    {
         this.bindEvents();
+       /** if(window.localStorage.getItem("username") != undefined)
+        {
+            alert(window.localStorage.getItem("username"))
+            $.mobile.changePage('#mainpage');
+        }*/
     },
     // Bind Event Listeners
     //

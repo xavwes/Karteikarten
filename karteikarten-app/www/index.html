@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Karteikarten</title>
     </head>
@@ -70,19 +71,26 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            /**
             if(window.localStorage.getItem("username") != undefined)
             {
-                alert(window.localStorage.getItem("username"));
                 $.mobile.changePage('#mainpage');
-            }
+
+            }*/
 
             $('#login-btn').click(function()
             {
                 var formData = $('#login').serialize();
+                var params = formData.split("&");
+                var username = params[0].split("=")[1];
+                var password = params[1].split("=")[1];
+
+                //Passwort hashen
+                password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
                 $.ajax({
-                    url: 'http://192.168.0.14/karteikarten/karteikarten-server/login.php',
-                    data: formData,
+                    url: 'http://192.168.0.14/Karteikarten/karteikarten-server/login.php',
+                    data: {"username" : username, "password" : password},
                     type: 'GET',
                     dataType: 'json',
 
@@ -115,6 +123,58 @@
             $('#register-btn').click(function()
             {
                 $.mobile.changePage('#registerpage');
+            });
+
+            $('#registerAccount-btn').click(function()
+            {
+                var formDataRegister = $('#register').serialize();
+                var parameters = formDataRegister.split("&");
+                var registername = parameters[0].split("=")[1];
+                var registerpassword = parameters[1].split("=")[1];
+                var repeated_password = parameters[2].split("=")[1];
+
+                if(registerpassword == repeated_password)
+                {
+                    //Passwort hashen
+                    registerpassword = CryptoJS.SHA256(registerpassword).toString(CryptoJS.enc.Hex);
+                    alert(registerpassword);
+
+                    $.ajax({
+                        url: 'http://192.168.0.14/Karteikarten/karteikarten-server/register.php',
+                        data: {"registername":registername, "registerpassword":registerpassword},
+                        type: 'GET',
+                        dataType: 'json',
+
+                        success: function (result)
+                        {
+
+                            if(result['user'] == 'added')
+                            {
+                                window.localStorage.setItem("username", "xaver");
+                                $.mobile.changePage('#mainpage');
+                            }
+                            else
+                            {
+                                alert('Login failed');
+                            }
+                        },
+                        error: function (request,error, result) {
+                            // This callback function will trigger on unsuccessful action
+                            alert('Network error has occurred please try again!');
+                            console.log('Request', request);
+                            console.log('Error', error);
+                            console.log('Response', result);
+
+                        }
+
+                    });
+                }
+                else
+                {
+                    alert("Passwörter stimmen nicht überein");
+                }
+
+                return false;
             });
 
 
