@@ -49,10 +49,6 @@
                 <button id="register-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
             </div>
 
-            <div data-role="page" id="mainpage">
-                <p id="anrede">Hello User</p>
-            </div>
-
             <div data-role="page" id="registerpage">
                 <h1>Registrieren</h1>
                 <form id="register" data-ajax="false">
@@ -65,6 +61,37 @@
                     <button type="submit" id="registerAccount-btn" name="registerAccount-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
                 </form>
             </div>
+
+            <div data-role="page" id="mainpage">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#mainpage" class="ui-btn-active">Fächer</a></li>
+                        <li><a href="#auswertung">Auswertung</a></li>
+                    </ul>
+                </div>
+                <ul data-role="listview" class="ui-listview">
+                    <li class="ui-li ui-li-static ui-btn-up-c ui-first-child">Fach 1</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 2</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 3</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 4</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 5</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 6</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c ui-last-child">Fach 7</li>
+                </ul>
+
+            </div>
+
+
+            <div data-role="page" id="auswertung">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#mainpage">Fächer</a></li>
+                        <li><a href="#auswertung" class="ui-btn-active">Auswertung</a></li>
+                    </ul>
+                </div>
+                <p>Hier entsteht irgendwann mal die Auswertung</p>
+            </div>
+
 
         </div>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
