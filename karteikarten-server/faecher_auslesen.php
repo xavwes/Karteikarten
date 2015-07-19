@@ -23,10 +23,19 @@
 
         echo json_encode($topic_array);
     }
-    else{
+    else
+    {
         $topic_array = array();
-        while($row = mysql_fetch_array($result)){
-            $topic_array['Topics'][] = $row['topic'];
+        while($row = mysql_fetch_array($result))
+        {
+            $sql = "Select * from topics where id=" . $row['topic'];
+            $res = mysql_query($sql) or die("Anfrage auf Topics failed");
+            while($return = mysql_fetch_array($res))
+            {
+                $topic_array['Topics'][] = $return['topic'];
+            }
+
+
         }
         echo json_encode($topic_array);
     }
