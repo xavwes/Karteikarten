@@ -70,15 +70,13 @@
                     </ul>
                 </div>
                 <ul data-role="listview" class="ui-listview" id="topics">
-                    <!--<li class="ui-li ui-li-static ui-btn-up-c ui-first-child">Fach 1</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 2</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 3</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 4</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 5</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c">Fach 6</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c ui-last-child">Fach 7</li>-->
+
                 </ul>
 
+            </div>
+
+            <div data-role="page" id="abfragepage">
+                <p>Abfragen</p>
             </div>
 
 
@@ -125,9 +123,12 @@
                             {
                                 var node = document.createElement("li");
                                 node.className = "ui-li ui-li-static ui-btn-up-c ui-body-inherit";
+                                var linktag = document.createElement("a");
+                                linktag.href = "#abfragepage";
                                 var text = String(tops[i])
                                 var textnode = document.createTextNode(text);
-                                node.appendChild(textnode);
+                                node.appendChild(linktag);
+                                linktag.appendChild(textnode);
                                 document.getElementById("topics").appendChild(node);
                             }
                         });
