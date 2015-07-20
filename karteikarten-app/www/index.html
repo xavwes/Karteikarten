@@ -69,14 +69,14 @@
                         <li><a href="#auswertung">Auswertung</a></li>
                     </ul>
                 </div>
-                <ul data-role="listview" class="ui-listview">
-                    <li class="ui-li ui-li-static ui-btn-up-c ui-first-child">Fach 1</li>
+                <ul data-role="listview" class="ui-listview" id="topics">
+                    <!--<li class="ui-li ui-li-static ui-btn-up-c ui-first-child">Fach 1</li>
                     <li class="ui-li ui-li-static ui-btn-up-c">Fach 2</li>
                     <li class="ui-li ui-li-static ui-btn-up-c">Fach 3</li>
                     <li class="ui-li ui-li-static ui-btn-up-c">Fach 4</li>
                     <li class="ui-li ui-li-static ui-btn-up-c">Fach 5</li>
                     <li class="ui-li ui-li-static ui-btn-up-c">Fach 6</li>
-                    <li class="ui-li ui-li-static ui-btn-up-c ui-last-child">Fach 7</li>
+                    <li class="ui-li ui-li-static ui-btn-up-c ui-last-child">Fach 7</li>-->
                 </ul>
 
             </div>
@@ -105,6 +105,44 @@
 
             }*/
 
+            $(document).on('pageinit', '#mainpage', function()
+            {
+                $.ajax({
+                    url: 'http://localhost/Karteikarten/karteikarten-server/faecher_auslesen.php',
+                    data: {"username" : "xaver"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.each(result, function(index, element)
+                        {
+                            var topics = element;
+                            var topics_string = String(topics);
+                            var tops = topics_string.split(",");
+
+                            for(var i = 0; i < tops.length; i++)
+                            {
+                                var node = document.createElement("li");
+                                node.className = "ui-li ui-li-static ui-btn-up-c ui-body-inherit";
+                                var text = String(tops[i])
+                                var textnode = document.createTextNode(text);
+                                node.appendChild(textnode);
+                                document.getElementById("topics").appendChild(node);
+                            }
+                        });
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
             $('#login-btn').click(function()
             {
                 var formData = $('#login').serialize();
@@ -116,7 +154,7 @@
                 password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
                 $.ajax({
-                    url: 'http://192.168.0.14/Karteikarten/karteikarten-server/login.php',
+                    url: 'http://localhost/Karteikarten/karteikarten-server/login.php',
                     data: {"username" : username, "password" : password},
                     type: 'GET',
                     dataType: 'json',
@@ -167,7 +205,7 @@
                     alert(registerpassword);
 
                     $.ajax({
-                        url: 'http://192.168.0.14/Karteikarten/karteikarten-server/register.php',
+                        url: 'http://localhost/Karteikarten/karteikarten-server/register.php',
                         data: {"registername":registername, "registerpassword":registerpassword},
                         type: 'GET',
                         dataType: 'json',
