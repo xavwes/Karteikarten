@@ -7,6 +7,7 @@
     $connection = connectToDatabase();
 
     $username = $_GET['username'];
+    $topic = $_GET['topic'];
 
     //get 'user id' from 'username'
     $userIdQuery = "Select id from users where username='" . $username . "'";
@@ -14,8 +15,14 @@
     $row = mysql_fetch_row($userId);
     $id = $row[0];
 
+    //Get "topic id" from topics
+    $topicIdQuery = "Select id from topics where topic='" . $topic . "'";
+    $topicId = mysql_query($topicIdQuery) or die("TopicID Anfrage failed");
+    $rowtopic = mysql_fetch_row($topicId);
+    $topID = $rowtopic[0];
+
     //get 'karteikarten' created from user with $id 
-    $sql = "Select * from karteikarten where user='" . $id . "'";
+    $sql = "Select * from karteikarten where user='" . $id . "' and topic='" . $topID . "'";
     $result = mysql_query($sql) or die("Karteikarten-Anfrage failed");
 
 
