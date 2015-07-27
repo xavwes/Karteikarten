@@ -45,3 +45,21 @@
 {
     text-align: left;
 }
+
+.question-answer
+{
+    background-color: yellow;
+    vertical-align: middle;
+    height: 400px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 20px;
+    font-size: 16pt;
+    font-weight: bold;
+
+}
+
+#buttons_truefalse
+{
+    display: none;
+}
