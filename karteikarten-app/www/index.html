@@ -115,17 +115,20 @@
 
             }*/
 
-            $(document).on('pageinit', '#mainpage', function()
+            $(document).on('pageinit', '#abfragepage', function()
             {
+                var topic = localStorage.topic;
+                document.getElementById("topic_header").innerHTML = topic;
+
                 $.ajax({
-                    url: 'http://localhost/Karteikarten/karteikarten-server/faecher_auslesen.php',
-                    data: {"username" : "xaver"},
+                    url: 'http://localhost/Karteikarten/karteikarten-server/karteikarten_abfragen.php',
+                    data: {"username" : "user1", "topic" : topic},
                     type: 'GET',
                     dataType: 'json',
 
                     success: function (result)
                     {
-                        $.each(result, function(index, element)
+                        /**$.each(result, function(index, element)
                         {
                             var topics = element;
                             var topics_string = String(topics);
@@ -144,6 +147,48 @@
                                 linktag.appendChild(textnode);
                                 document.getElementById("topics").appendChild(node);
                             }
+                        });*/
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
+            $(document).on('pageinit', '#mainpage', function()
+            {
+                $.ajax({
+                    url: 'http://localhost/Karteikarten/karteikarten-server/faecher_auslesen.php',
+                    data: {"username" : "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.each(result, function(index, element)
+                        {
+                            var topics = element;
+                            var topics_string = String(topics);
+                            var tops = topics_string.split(",");
+
+                            for(var i = 0; i < tops.length; i++)
+                            {
+                                var text = String(tops[i]);
+                                var node = document.createElement("li");
+                                node.className = "ui-li ui-li-static ui-btn-up-c ui-body-inherit";
+                                var linktag = document.createElement("a");
+                                linktag.id = "topics";
+                                linktag.className = "ui-btn-icon-right ui-icon-carat-r"
+                                var textnode = document.createTextNode(text);
+                                node.appendChild(linktag);
+                                linktag.appendChild(textnode);
+                                document.getElementById("topics").appendChild(node);
+                            }
                         });
                     },
                     error: function (request,error, result) {
@@ -156,6 +201,16 @@
                     }
                 });
             });
+
+            $("#topics").click(function(event)
+            {
+                var topic = $(event.target).text();
+                localStorage.topic = topic;
+                $.mobile.changePage('#abfragepage');
+            });
+
+
+
 
             $('#login-btn').click(function()
             {
