@@ -23,11 +23,11 @@
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/css.css" />
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/css.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Karteikarten</title>
     </head>
@@ -121,13 +121,24 @@
                 document.getElementById("topic_header").innerHTML = topic;
 
                 $.ajax({
-                    url: 'http://localhost/Karteikarten/karteikarten-server/karteikarten_abfragen.php',
+                    url: 'http://h2467150.stratoserver.net/karteikarten_abfragen.php',
                     data: {"username" : "user1", "topic" : topic},
                     type: 'GET',
                     dataType: 'json',
 
                     success: function (result)
                     {
+                        $.each(result, function(index, element)
+                        {
+                            var key = 'Karteikarten';
+                            var karteikarten = result[key];
+
+                            $.each(karteikarten, function(index, element)
+                            {
+                               var key2 = 'frage';
+                               alert(element[frage]);
+                            });
+                        });
                         /**$.each(result, function(index, element)
                         {
                             var topics = element;
@@ -163,7 +174,7 @@
             $(document).on('pageinit', '#mainpage', function()
             {
                 $.ajax({
-                    url: 'http://localhost/Karteikarten/karteikarten-server/faecher_auslesen.php',
+                    url: 'http://h2467150.stratoserver.net/faecher_auslesen.php',
                     data: {"username" : "user1"},
                     type: 'GET',
                     dataType: 'json',
@@ -223,7 +234,7 @@
                 password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
                 $.ajax({
-                    url: 'http://localhost/Karteikarten/karteikarten-server/login.php',
+                    url: 'http://h2467150.stratoserver.net/login.php',
                     data: {"username" : username, "password" : password},
                     type: 'GET',
                     dataType: 'json',
@@ -274,7 +285,7 @@
                     alert(registerpassword);
 
                     $.ajax({
-                        url: 'http://localhost/Karteikarten/karteikarten-server/register.php',
+                        url: 'http://h2467150.stratoserver.net/register.php',
                         data: {"registername":registername, "registerpassword":registerpassword},
                         type: 'GET',
                         dataType: 'json',
