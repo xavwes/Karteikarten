@@ -128,16 +128,14 @@
 
                     success: function (result)
                     {
-                        $.each(result, function(index, element)
+                        var karteikarten = result.Karteikarten;
+                        $.each(karteikarten, function(index, element)
                         {
-                            var key = 'Karteikarten';
-                            var karteikarten = result[key];
+                            var frage = element.frage;
+                            var answer = element.antwort;
+                            alert(frage);
+                            alert(answer);
 
-                            $.each(karteikarten, function(index, element)
-                            {
-                               var key2 = 'frage';
-                               alert(element[frage]);
-                            });
                         });
                         /**$.each(result, function(index, element)
                         {
