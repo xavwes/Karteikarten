@@ -23,7 +23,13 @@
 #loginpage
 {
     width: 100%;
+
+}
+
+#login
+{
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .app
@@ -50,7 +56,7 @@
 {
     background-color: yellow;
     vertical-align: middle;
-    height: 400px;
+    height: 350px;
     margin-left: 20px;
     margin-right: 20px;
     padding-top: 20px;
@@ -62,4 +68,10 @@
 #buttons_truefalse
 {
     display: none;
+}
+
+#create-card
+{
+    padding-left: 15px;
+    padding-right: 15px;
 }

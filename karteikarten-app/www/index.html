@@ -72,6 +72,9 @@
                 <ul data-role="listview" class="ui-listview" id="topics">
 
                 </ul>
+                <br>
+                <br>
+                <button id="addCards" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte hinzufügen</button>
 
             </div>
 
@@ -91,6 +94,24 @@
 
             </div>
 
+            <div data-role="page" id="kartenerstellen">
+                <br>
+                <h1>Karteikarte anlegen</h1>
+                <form id="create-card" data-ajax="false">
+                    <label>Fach:</label>
+                    <select name="topic-select" id="topic-select">
+
+                    </select>
+                    <label>Frage:</label>
+                    <textarea rows="5" cols="35" id="input-question" name="input-question" >Geben Sie hier ihre Frage ein
+                    </textarea>
+
+                    <label>Antwort:</label>
+                    <textarea rows="5" cols="35" id="input-answer" name="input-question" >Geben Sie hier ihre Antwort ein
+                    </textarea>
+                    <button type="submit" id="create-card-btn" name="create-card-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte erstellen</button>
+                </form>
+            </div>
 
             <div data-role="page" id="auswertung">
                 <div data-role="navbar">
@@ -111,12 +132,6 @@
             var questions = [];
             var answers = [];
             var cards_counter = 0;
-            /**
-            if(window.localStorage.getItem("username") != undefined)
-            {
-                $.mobile.changePage('#mainpage');
-
-            }*/
 
             $(document).on('pageshow', '#abfragepage', function()
             {
@@ -282,7 +297,7 @@
 
                         if(result['Status'] == 'login')
                         {
-                            window.localStorage.setItem("username", "xaver");
+                            localStorage.username = username;
                             $.mobile.changePage('#mainpage');
                         }
                         else
@@ -301,6 +316,12 @@
                 });
 
                 return false;
+            });
+
+
+            $('#addCards').click(function()
+            {
+                $.mobile.changePage('#kartenerstellen');
             });
 
             $('#register-btn').click(function()
@@ -333,7 +354,7 @@
 
                             if(result['user'] == 'added')
                             {
-                                window.localStorage.setItem("username", "xaver");
+                                localStorage.setItem("username", registername);
                                 $.mobile.changePage('#mainpage');
                             }
                             else
