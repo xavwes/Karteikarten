@@ -79,14 +79,14 @@
                 <br>
                 <h1 id="topic_header">Topic</h1>
                 <div class="question-answer">
-                    <p>Frage<br><br><br>Antwort</p>
+                    <p id="question">Frage:</p><br><p id="answer">Antwort:</p>
                 </div>
                 <br>
-                <button class="ui-btn ui-corner-all ui-btn-inline">Antwort Anzeigen</button>
+                <button class="ui-btn ui-corner-all ui-btn-inline" id="showAnswer">Antwort Anzeigen</button>
                 <br>
                 <div id="buttons_truefalse">
-                    <button class="ui-btn ui-corner-all ui-btn-inline">Richtig</button>
-                    <button class="ui-btn ui-corner-all ui-btn-inline">Falsch</button>
+                    <button class="ui-btn ui-corner-all ui-btn-inline" id="rightButton">Richtig</button>
+                    <button class="ui-btn ui-corner-all ui-btn-inline" id="falseButton">Falsch</button>
                 </div>
 
             </div>
@@ -108,6 +108,9 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            var questions = [];
+            var answers = [];
+            var cards_counter = 0;
             /**
             if(window.localStorage.getItem("username") != undefined)
             {
@@ -115,7 +118,7 @@
 
             }*/
 
-            $(document).on('pageinit', '#abfragepage', function()
+            $(document).on('pageshow', '#abfragepage', function()
             {
                 var topic = localStorage.topic;
                 document.getElementById("topic_header").innerHTML = topic;
@@ -133,30 +136,11 @@
                         {
                             var frage = element.frage;
                             var answer = element.antwort;
-                            alert(frage);
-                            alert(answer);
+                            questions.push(frage);
+                            answers.push(answer);
 
                         });
-                        /**$.each(result, function(index, element)
-                        {
-                            var topics = element;
-                            var topics_string = String(topics);
-                            var tops = topics_string.split(",");
-
-                            for(var i = 0; i < tops.length; i++)
-                            {
-                                var node = document.createElement("li");
-                                node.className = "ui-li ui-li-static ui-btn-up-c ui-body-inherit";
-                                var linktag = document.createElement("a");
-                                linktag.href = "#abfragepage";
-                                linktag.className = "ui-btn-icon-right ui-icon-carat-r"
-                                var text = String(tops[i])
-                                var textnode = document.createTextNode(text);
-                                node.appendChild(linktag);
-                                linktag.appendChild(textnode);
-                                document.getElementById("topics").appendChild(node);
-                            }
-                        });*/
+                        document.getElementById("question").innerHTML += "<br>" +  questions[cards_counter];
                     },
                     error: function (request,error, result) {
                         // This callback function will trigger on unsuccessful action
@@ -219,7 +203,63 @@
             });
 
 
+            $('#showAnswer').click(function()
+            {
+                document.getElementById("answer").innerHTML += "<br>" + answers[cards_counter];
+                //Button ShowAnswer, TrueFalse Buttons einblenden
+                document.getElementById("showAnswer").style.display ="none";
+                document.getElementById("buttons_truefalse").style.display ="inline";
+            });
 
+            $('#rightButton').click(function()
+            {
+                cards_counter++;
+                if(questions[cards_counter] != null)
+                {
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+
+                    document.getElementById("question").innerHTML = "Frage: <br>" + questions[cards_counter];
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                }
+                else
+                {
+                    $.mobile.changePage('#mainpage');
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+                    document.getElementById("question").innerHTML = "Frage:";
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                    cards_counter = 0;
+                    questions = [];
+                    answers = [];
+                }
+
+            });
+
+            $('#falseButton').click(function()
+            {
+                cards_counter++;
+                if(questions[cards_counter] != null)
+                {
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+
+                    document.getElementById("question").innerHTML = "Frage: <br>" + questions[cards_counter];
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                }
+                else
+                {
+                    $.mobile.changePage('#mainpage');
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+                    document.getElementById("question").innerHTML = "Frage:";
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                    cards_counter = 0;
+                    questions = [];
+                    answers = [];
+                }
+
+            });
 
             $('#login-btn').click(function()
             {
