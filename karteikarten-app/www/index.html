@@ -109,8 +109,11 @@
                     <label>Antwort:</label>
                     <textarea rows="5" cols="35" id="input-answer" name="input-question" >Geben Sie hier ihre Antwort ein
                     </textarea>
-                    <button type="submit" id="create-card-btn" name="create-card-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte erstellen</button>
+
                 </form>
+
+                <button type="submit" id="create-card-btn" name="create-card-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte erstellen</button>
+
             </div>
 
             <div data-role="page" id="auswertung">
@@ -135,6 +138,13 @@
 
             $(document).on('pageshow', '#abfragepage', function()
             {
+                document.getElementById("question").innerHTML = "Frage:";
+                document.getElementById("answer").innerHTML = "Antwort:";
+
+                questions = [];
+                answers = [];
+                cards_counter = 0;
+
                 var topic = localStorage.topic;
                 document.getElementById("topic_header").innerHTML = topic;
 
@@ -167,6 +177,45 @@
                     }
                 });
             });
+
+            $(document).on('pageinit', '#kartenerstellen', function()
+            {
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/faecher_auslesen.php',
+                    data: {"username" : "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.each(result, function(index, element)
+                        {
+                            var topics = element;
+                            var topics_string = String(topics);
+                            var tops = topics_string.split(",");
+
+                            for(var i = 0; i < tops.length; i++)
+                            {
+                                var text = String(tops[i]);
+                                var node = document.createElement("option");
+                                node.value = text;
+                                var textnode = document.createTextNode(text);
+                                node.appendChild(textnode);
+                                document.getElementById("topic-select").appendChild(node);
+                            }
+                        });
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
 
             $(document).on('pageinit', '#mainpage', function()
             {
@@ -208,6 +257,36 @@
 
                     }
                 });
+            });
+
+            $("#create-card-btn").click(function()
+            {
+                var formData = $('#create-card').serialize();
+                var params = formData.split("&");
+                var topic = params[0].split("=")[1];
+                var question = document.getElementById("input-question").value;
+                var answer = document.getElementById("input-answer").value;
+
+                $.ajax({
+                    url: 'http://localhost/Karteikarten/karteikarten-server/karteikarte_erstellen.php',
+                    data: {"topic-select": topic, "input-question": question, "input-answer": answer, "user": "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.mobile.changePage("#mainpage");
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+
             });
 
             $("#topics").click(function(event)
