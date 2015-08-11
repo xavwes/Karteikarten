@@ -434,7 +434,7 @@
                 {
                     //Passwort hashen
                     registerpassword = CryptoJS.SHA256(registerpassword).toString(CryptoJS.enc.Hex);
-                    alert(registerpassword);
+
 
                     $.ajax({
                         url: 'http://h2467150.stratoserver.net/register.php',
@@ -452,7 +452,7 @@
                             }
                             else
                             {
-                                alert('Login failed');
+                                alert('Registrierung failed');
                             }
                         },
                         error: function (request,error, result) {
