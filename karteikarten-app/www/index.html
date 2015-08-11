@@ -289,6 +289,14 @@
 
             });
 
+            $("#input-question").focus(function(){
+               document.getElementById("input-question").value = "";
+            });
+
+            $("#input-answer").focus(function(){
+                document.getElementById("input-answer").value = "";
+            });
+
             $("#topics").click(function(event)
             {
                 var topic = $(event.target).text();
