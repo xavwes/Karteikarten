@@ -75,6 +75,8 @@
                 <br>
                 <br>
                 <button id="addCards" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte hinzufügen</button>
+                <br>
+                <button id="logout" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Logout</button>
 
             </div>
 
@@ -287,6 +289,10 @@
                     }
                 });
 
+            });
+
+            $("#logout").click(function(){
+                $.mobile.changePage("#");
             });
 
             $("#input-question").focus(function(){
