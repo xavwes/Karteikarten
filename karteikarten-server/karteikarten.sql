@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `answers` (
 
 -- Tabelle bereinigen
 
-DELETE FROM 'answers';
+DELETE FROM answers;
 
 --
 -- Daten für Tabelle `answers`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `karteikarten` (
 
 -- Tabelle bereinigen
 
-DELETE FROM 'karteikarten';
+DELETE FROM karteikarten;
 
 --
 -- Daten für Tabelle `karteikarten`
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
 
 -- Tabelle bereinigen
 
-DELETE FROM 'topics';
+DELETE FROM topics;
 
 --
 -- Daten für Tabelle `topics`
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Tabelle bereinigen
 
-DELETE FROM 'users';
+DELETE FROM users;
 
 --
 -- Daten für Tabelle `users`
