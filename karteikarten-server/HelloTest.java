@@ -11,29 +11,33 @@ public class HelloTest {
 
     @Test public void register(){
 		// Registrieren service mit neuem Benutzer
-		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=newUser&registerpassword=newUserPassword");
-	
-
-            Log.i("url", url_request.toString());
-            HttpClient httpClient = new DefaultHttpClient();
-
-            HttpGet httpGet = new HttpGet(url_request.toString());
-            HttpResponse getResponse = httpClient.execute(httpGet);
+		URL url;
+		// URL aufbauen
+		url = new URL("http://h2467150.stratoserver.net/register.php?registername=newUser&registerpassword=newUserPassword");
+		// verbindung herstellen
+		URLConnection con = url.openConnection();
+		// Antwort als InputStream aufnehmen
+		InputStream in = con.getInputStream();
+		// Encoding rausfinden
+		String encoding = con.getContentEncoding();
+		encoding = encoding == null ? "UTF-8" : encoding;
+		//encoden
+		String body = IOUtils.toString(in, encoding);
             
-            assertEquals("user"+":"+"added", getResponse);
+            	assertTrue(body.contains("added"));
 			
 		// Registrieren service mit bestehendem Benutzer
-		
-		StringBuilder url_request2 = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=user1&registerpassword=test");
-
-
-            Log.i("url", url_request2.toString());
-            HttpClient httpClient2 = new DefaultHttpClient();
-
-            HttpGet httpGet2 = new HttpGet(url_request2.toString());
-            HttpResponse getResponse2 = httpClient2.execute(httpGet2);
-            
-            
-            assertEquals("user"+":"+"exists", getResponse2);
+		url = new URL("http://h2467150.stratoserver.net/register.php?registername=user1&registerpassword=test");
+		// verbindung herstellen
+		con = url.openConnection();
+		// Antwort als InputStream aufnehmen
+		in = con.getInputStream();
+		// Encoding rausfinden
+		encoding = con.getContentEncoding();
+		encoding = encoding == null ? "UTF-8" : encoding;
+		//encoden
+		body = IOUtils.toString(in, encoding);
+            	
+	        assertTrue(body.contains("exists"));
 	}
 }
