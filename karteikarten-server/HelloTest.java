@@ -1,4 +1,5 @@
-import org.junit.*; 
+import org.junit.*;
+import android.util.Log;
 // by FYICenter.com
 public class HelloTest { 
     @Test public void testHello() {
