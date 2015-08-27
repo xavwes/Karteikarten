@@ -23,7 +23,7 @@ public class HelloTest {
 			
 		// Registrieren service mit bestehendem Benutzer
 		
-		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=user1&registerpassword=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
+		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=user1&registerpassword=test");
             url_request.append(params[0]);
 
             Log.i("url", url_request.toString());
