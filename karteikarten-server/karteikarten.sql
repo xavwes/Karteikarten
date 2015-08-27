@@ -32,6 +32,10 @@ CREATE TABLE IF NOT EXISTS `answers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
+-- Tabelle bereinigen
+
+DELETE FROM 'answers';
+
 --
 -- Daten für Tabelle `answers`
 --
@@ -80,6 +84,10 @@ CREATE TABLE IF NOT EXISTS `karteikarten` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
+-- Tabelle bereinigen
+
+DELETE FROM 'karteikarten';
+
 --
 -- Daten für Tabelle `karteikarten`
 --
@@ -116,6 +124,10 @@ CREATE TABLE IF NOT EXISTS `topics` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
+-- Tabelle bereinigen
+
+DELETE FROM 'topics';
+
 --
 -- Daten für Tabelle `topics`
 --
@@ -137,6 +149,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- Tabelle bereinigen
+
+DELETE FROM 'users';
 
 --
 -- Daten für Tabelle `users`
