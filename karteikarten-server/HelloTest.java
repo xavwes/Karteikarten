@@ -24,7 +24,7 @@ public class HelloTest {
 		//encoden
 		String body = IOUtils.toString(in, encoding);
             
-            	assertFalse(body.contains("added"));
+            	assertTrue(body.contains("added"));
 			
 		// Registrieren service mit bestehendem Benutzer
 		url = new URL("http://h2467150.stratoserver.net/register.php?registername=user1&registerpassword=test");
