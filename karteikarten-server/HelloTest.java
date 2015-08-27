@@ -14,7 +14,7 @@ public class HelloTest {
     }
     
     @Test
-	public void register() throws ClientProtocolException, IOException{
+	public void register(){
 		// Registrieren service mit neuem Benutzer
 		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=newUser&registerpassword=newUserPassword");
 			url_request.append(params[0]);
