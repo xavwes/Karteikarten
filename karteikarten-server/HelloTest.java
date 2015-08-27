@@ -12,7 +12,7 @@ public class HelloTest {
     @Test public void register(){
 		// Registrieren service mit neuem Benutzer
 		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=newUser&registerpassword=newUserPassword");
-	System.out.println("test"); 
+	
 
             Log.i("url", url_request.toString());
             HttpClient httpClient = new DefaultHttpClient();
@@ -20,7 +20,6 @@ public class HelloTest {
             HttpGet httpGet = new HttpGet(url_request.toString());
             HttpResponse getResponse = httpClient.execute(httpGet);
             
-            System.out.println(getResponse); 
             assertEquals("user"+":"+"added", getResponse);
 			
 		// Registrieren service mit bestehendem Benutzer
