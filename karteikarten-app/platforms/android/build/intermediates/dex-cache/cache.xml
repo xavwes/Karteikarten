@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/awallis/Desktop/Karteikarten/karteikarten-app/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="868e07a82afa66a3e1fbfabdfc8b69e617b5584b">
+        <dex dex="/Users/awallis/Desktop/Karteikarten/karteikarten-app/platforms/android/build/intermediates/pre-dexed/debug/classes-471c8559010b1931d8a4791609155f4314c3094a.jar" />
+    </item>
+
+</items>

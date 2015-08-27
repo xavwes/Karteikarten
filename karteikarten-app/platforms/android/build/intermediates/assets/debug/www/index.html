@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/css.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <title>Karteikarten</title>
+    </head>
+    <body>
+        <div class="app">
+
+            <!-- Page one, Login und Registrieren Button, wenn schon LoginDaten gespeichert sind, automatisch einloggen -->
+            <div data-role="page" id="loginpage">
+                <h1>Karteikarten App</h1>
+                <h2>Login</h2>
+                <form id="login" data-ajax="false">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" placeholder="Username" value="">
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="password" id="password" placeholder="Passwort" value="">
+                    <button type="submit" id="login-btn" name="login-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Login</button>
+                </form>
+                <br>
+                <button id="register-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
+            </div>
+
+            <div data-role="page" id="registerpage">
+                <h1>Registrieren</h1>
+                <form id="register" data-ajax="false">
+                    <label for="username">Username:</label>
+                    <input type="text" name="registername" id="registername" placeholder="Username" value="">
+                    <label for="password">Passwort:</label>
+                    <input type="password" name="registerpassword" id="registerpassword" placeholder="Passwort" value="">
+                    <label for="password">Passwort wiederholen:</label>
+                    <input type="password" name="registerpasswordsecond" id="registerpasswordsecond" placeholder="Passwort wiederholen" value="">
+                    <button type="submit" id="registerAccount-btn" name="registerAccount-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Registrieren</button>
+                </form>
+            </div>
+
+            <div data-role="page" id="mainpage">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#mainpage" class="ui-btn-active">Fächer</a></li>
+                        <li><a href="#auswertung">Auswertung</a></li>
+                    </ul>
+                </div>
+                <ul data-role="listview" class="ui-listview" id="topics">
+
+                </ul>
+                <br>
+                <br>
+                <button id="addCards" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte hinzufügen</button>
+                <br>
+                <button id="logout" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Logout</button>
+
+            </div>
+
+            <div data-role="page" id="abfragepage">
+                <br>
+                <h1 id="topic_header">Topic</h1>
+                <div class="question-answer">
+                    <p id="question">Frage:</p><br><p id="answer">Antwort:</p>
+                </div>
+                <br>
+                <button class="ui-btn ui-corner-all ui-btn-inline" id="showAnswer">Antwort Anzeigen</button>
+                <br>
+                <div id="buttons_truefalse">
+                    <button class="ui-btn ui-corner-all ui-btn-inline" id="rightButton">Richtig</button>
+                    <button class="ui-btn ui-corner-all ui-btn-inline" id="falseButton">Falsch</button>
+                </div>
+
+            </div>
+
+            <div data-role="page" id="kartenerstellen">
+                <br>
+                <h1>Karteikarte anlegen</h1>
+                <form id="create-card" data-ajax="false">
+                    <label>Fach:</label>
+                    <select name="topic-select" id="topic-select">
+
+                    </select>
+                    <label>Frage:</label>
+                    <textarea rows="5" cols="35" id="input-question" name="input-question" >Geben Sie hier ihre Frage ein
+                    </textarea>
+
+                    <label>Antwort:</label>
+                    <textarea rows="5" cols="35" id="input-answer" name="input-question" >Geben Sie hier ihre Antwort ein
+                    </textarea>
+
+                </form>
+
+                <button type="submit" id="create-card-btn" name="create-card-btn" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Karteikarte erstellen</button>
+
+            </div>
+
+            <div data-role="page" id="auswertung">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#mainpage">Fächer</a></li>
+                        <li><a href="#auswertung" class="ui-btn-active">Auswertung</a></li>
+                    </ul>
+                </div>
+                <p>Hier entsteht irgendwann mal die Auswertung</p>
+            </div>
+
+
+        </div>
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+            var questions = [];
+            var answers = [];
+            var cards_counter = 0;
+
+            $(document).on('pageshow', '#abfragepage', function()
+            {
+                document.getElementById("question").innerHTML = "Frage:";
+                document.getElementById("answer").innerHTML = "Antwort:";
+
+                questions = [];
+                answers = [];
+                cards_counter = 0;
+
+                var topic = localStorage.topic;
+                document.getElementById("topic_header").innerHTML = topic;
+
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/karteikarten_abfragen.php',
+                    data: {"username" : "user1", "topic" : topic},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        var karteikarten = result.Karteikarten;
+                        $.each(karteikarten, function(index, element)
+                        {
+                            var frage = element.frage;
+                            var answer = element.antwort;
+                            questions.push(frage);
+                            answers.push(answer);
+
+                        });
+                        document.getElementById("question").innerHTML += "<br>" +  questions[cards_counter];
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
+            $(document).on('pageinit', '#kartenerstellen', function()
+            {
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/faecher_auslesen.php',
+                    data: {"username" : "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.each(result, function(index, element)
+                        {
+                            var topics = element;
+                            var topics_string = String(topics);
+                            var tops = topics_string.split(",");
+
+                            for(var i = 0; i < tops.length; i++)
+                            {
+                                var text = String(tops[i]);
+                                var node = document.createElement("option");
+                                node.value = text;
+                                var textnode = document.createTextNode(text);
+                                node.appendChild(textnode);
+                                document.getElementById("topic-select").appendChild(node);
+                            }
+                        });
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
+
+            $(document).on('pageinit', '#mainpage', function()
+            {
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/faecher_auslesen.php',
+                    data: {"username" : "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.each(result, function(index, element)
+                        {
+                            var topics = element;
+                            var topics_string = String(topics);
+                            var tops = topics_string.split(",");
+
+                            for(var i = 0; i < tops.length; i++)
+                            {
+                                var text = String(tops[i]);
+                                var node = document.createElement("li");
+                                node.className = "ui-li ui-li-static ui-btn-up-c ui-body-inherit";
+                                var linktag = document.createElement("a");
+                                linktag.id = "topics";
+                                linktag.className = "ui-btn-icon-right ui-icon-carat-r"
+                                var textnode = document.createTextNode(text);
+                                node.appendChild(linktag);
+                                linktag.appendChild(textnode);
+                                document.getElementById("topics").appendChild(node);
+                            }
+                        });
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+            });
+
+            $("#create-card-btn").click(function()
+            {
+                var formData = $('#create-card').serialize();
+                var params = formData.split("&");
+                var topic = params[0].split("=")[1];
+                var question = document.getElementById("input-question").value;
+                var answer = document.getElementById("input-answer").value;
+
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/karteikarte_erstellen.php',
+                    data: {"topic-select": topic, "input-question": question, "input-answer": answer, "user": "user1"},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+                        $.mobile.changePage("#mainpage");
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+
+            });
+
+            $("#logout").click(function(){
+                $.mobile.changePage("#");
+            });
+
+            $("#input-question").focus(function(){
+               document.getElementById("input-question").value = "";
+            });
+
+            $("#input-answer").focus(function(){
+                document.getElementById("input-answer").value = "";
+            });
+
+            $("#topics").click(function(event)
+            {
+                var topic = $(event.target).text();
+                localStorage.topic = topic;
+                $.mobile.changePage('#abfragepage');
+            });
+
+
+            $('#showAnswer').click(function()
+            {
+                document.getElementById("answer").innerHTML += "<br>" + answers[cards_counter];
+                //Button ShowAnswer, TrueFalse Buttons einblenden
+                document.getElementById("showAnswer").style.display ="none";
+                document.getElementById("buttons_truefalse").style.display ="inline";
+            });
+
+            $('#rightButton').click(function()
+            {
+                cards_counter++;
+                if(questions[cards_counter] != null)
+                {
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+
+                    document.getElementById("question").innerHTML = "Frage: <br>" + questions[cards_counter];
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                }
+                else
+                {
+                    $.mobile.changePage('#mainpage');
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+                    document.getElementById("question").innerHTML = "Frage:";
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                    cards_counter = 0;
+                    questions = [];
+                    answers = [];
+                }
+
+            });
+
+            $('#falseButton').click(function()
+            {
+                cards_counter++;
+                if(questions[cards_counter] != null)
+                {
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+
+                    document.getElementById("question").innerHTML = "Frage: <br>" + questions[cards_counter];
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                }
+                else
+                {
+                    $.mobile.changePage('#mainpage');
+                    document.getElementById("showAnswer").style.display ="inline";
+                    document.getElementById("buttons_truefalse").style.display ="none";
+                    document.getElementById("question").innerHTML = "Frage:";
+                    document.getElementById("answer").innerHTML = "Antwort:";
+                    cards_counter = 0;
+                    questions = [];
+                    answers = [];
+                }
+
+            });
+
+            $('#login-btn').click(function()
+            {
+                var formData = $('#login').serialize();
+                var params = formData.split("&");
+                var username = params[0].split("=")[1];
+                var password = params[1].split("=")[1];
+
+                //Passwort hashen
+                password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+
+                $.ajax({
+                    url: 'http://h2467150.stratoserver.net/login.php',
+                    data: {"username" : username, "password" : password},
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (result)
+                    {
+
+                        if(result['Status'] == 'login')
+                        {
+                            localStorage.username = username;
+                            $.mobile.changePage('#mainpage');
+                        }
+                        else
+                        {
+                            alert('Login failed');
+                        }
+                    },
+                    error: function (request,error, result) {
+                        // This callback function will trigger on unsuccessful action
+                        alert('Network error has occurred please try again!');
+                        console.log('Request', request);
+                        console.log('Error', error);
+                        console.log('Response', result);
+
+                    }
+                });
+
+                return false;
+            });
+
+
+            $('#addCards').click(function()
+            {
+                $.mobile.changePage('#kartenerstellen');
+            });
+
+            $('#register-btn').click(function()
+            {
+                $.mobile.changePage('#registerpage');
+            });
+
+            $('#registerAccount-btn').click(function()
+            {
+                var formDataRegister = $('#register').serialize();
+                var parameters = formDataRegister.split("&");
+                var registername = parameters[0].split("=")[1];
+                var registerpassword = parameters[1].split("=")[1];
+                var repeated_password = parameters[2].split("=")[1];
+
+                if(registerpassword == repeated_password)
+                {
+                    //Passwort hashen
+                    registerpassword = CryptoJS.SHA256(registerpassword).toString(CryptoJS.enc.Hex);
+
+
+                    $.ajax({
+                        url: 'http://h2467150.stratoserver.net/register.php',
+                        data: {"registername":registername, "registerpassword":registerpassword},
+                        type: 'GET',
+                        dataType: 'json',
+
+                        success: function (result)
+                        {
+
+                            if(result['user'] == 'added')
+                            {
+                                localStorage.setItem("username", registername);
+                                $.mobile.changePage('#mainpage');
+                            }
+                            else
+                            {
+                                alert('Registrierung failed');
+                            }
+                        },
+                        error: function (request,error, result) {
+                            // This callback function will trigger on unsuccessful action
+                            alert('Network error has occurred please try again!');
+                            console.log('Request', request);
+                            console.log('Error', error);
+                            console.log('Response', result);
+
+                        }
+
+                    });
+                }
+                else
+                {
+                    alert("Passwörter stimmen nicht überein");
+                }
+
+                return false;
+            });
+
+
+        </script>
+    </body>
+</html>
