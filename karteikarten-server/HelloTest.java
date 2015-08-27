@@ -8,14 +8,8 @@ import org.junit.Test;
 
 // by FYICenter.com
 public class HelloTest {
-	/*
-    @Test public void testHello() {
-        String message = "Hello World!";
-        Assert.assertEquals(12, message.length());
-    }
-    */
-    @Test
-	public void register(){
+
+    @Test public void register(){
 		// Registrieren service mit neuem Benutzer
 		StringBuilder url_request = new StringBuilder("http://h2467150.stratoserver.net/register.php?registername=newUser&registerpassword=newUserPassword");
 
