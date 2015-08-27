@@ -7,12 +7,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Test;
 
 // by FYICenter.com
-public class HelloTest { 
+public class HelloTest {
+	/*
     @Test public void testHello() {
         String message = "Hello World!";
         Assert.assertEquals(12, message.length());
     }
-    
+    */
     @Test
 	public void register(){
 		// Registrieren service mit neuem Benutzer
